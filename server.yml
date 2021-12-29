@@ -1,0 +1,4 @@
+---
+- import_playbook: variable-check.yml
+  vars:
+    playbook: server.yml
