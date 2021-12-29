@@ -1,0 +1,67 @@
+---
+- name: (Debian/Ubuntu) {{ (nginx_setup == 'uninstall') | ternary('Remove', 'Configure') }} NGINX repository
+  apt_repository:
+    filename: nginx
+    repo: "{{ item }}"
+    update_cache: true
+    mode: 0644
+    state: "{{ (nginx_state == 'uninstall') | ternary('absent', 'present') }}"
+  loop: "{{ nginx_repository | default(nginx_default_repository_debian) }}"
+  when: nginx_manage_repo | bool
+
+- name: (Debian/Ubuntu) {{ (nginx_setup == 'uninstall') | ternary('Unpin', 'Pin') }} NGINX repository
+  blockinfile:
+    path: /etc/apt/preferences.d/99nginx
+    create: true
+    block: |
+      Package: *
+      Pin: origin nginx.org
+      Pin: release o=nginx
+      Pin-Priority: 900
+    mode: 0644
+    state: "{{ (nginx_state == 'uninstall') | ternary('absent', 'present') }}"
+  when: nginx_repository is not defined
+
+- name: (Debian/Ubuntu) {{ nginx_setup | capitalize }} NGINX
+  apt:
+    name: "nginx{{ nginx_version | default('') }}"
+    state: "{{ nginx_state }}"
+    update_cache: true
+    allow_downgrade: true
+  ignore_errors: "{{ ansible_check_mode }}"
+  notify: (Handler) Run NGINX
+
+#- name: Copy website files to the server's document root
+#  copy:
+#    src: "{{ app_root }}"
+#    dest: "{{ document_root }}"
+#    mode: preserve
+
+#- name: Ensure site directories exist
+#  file:
+#    path: "{{ nginx_path }}/{{ item }}"
+#    state: directory
+#    mode: '0755'
+#  with_items:
+#    - sites-available
+#    - sites-enabled
+
+- name: Remove default nginx
+  ansible.builtin.file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+
+- name: Apply Nginx template
+  ansible.builtin.template:
+    src: files/nginx.conf.j2
+    dest: /etc/nginx/conf.d/{{ server_name }}.conf
+    owner: www-data
+    group: www-data
+  notify: (Handler) Start/reload NGINX
+
+#- name: Enable new site
+#  file:
+#    src: /etc/nginx/sites-available/default
+#    dest: /etc/nginx/sites-enabled/default
+#    state: link
+#  notify: (Handler) Start/reload NGINX
