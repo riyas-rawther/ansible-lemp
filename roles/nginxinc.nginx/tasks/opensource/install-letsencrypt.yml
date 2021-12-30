@@ -17,7 +17,8 @@
     creates: /etc/nginx/dhparam.pem
 
 - name: Obtain SSL certificates from Let's Encrypt using Certbot
-  shell: certbot certonly --webroot -d {{ server_name }} --email {{ certbot_email }} -w /var/www/_letsencrypt -n --agree-tos --force-renewal 
+  shell: certbot certonly --webroot -d {{ server_name }} --email {{ certbot_email }} -w /var/www/_letsencrypt -n --agree-tos --force-renewal  
+#--test-cert --break-my-certs
 
 - name: Uncomment SSL related directives in the configuration
   shell: sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' /etc/nginx/sites-available/{{ server_name  }}.conf
