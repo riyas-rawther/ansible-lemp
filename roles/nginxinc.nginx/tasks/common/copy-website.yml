@@ -1,0 +1,5 @@
+- name: (Common) {{ nginx_setup | capitalize }} Copy website files to the server's document root
+  copy:
+    src: "{{ app_root }}"
+    dest: "{{ document_root }}"
+    mode: preserve
