@@ -34,26 +34,8 @@
 - name: Copy Website
   include_tasks: common/copy-website.yml
 
-
-#- name: Ensure site directories exist
-#  file:
-#    path: "{{ nginx_path }}/{{ item }}"
-#    state: directory
-#    mode: '0755'
-#  with_items:
-#    - sites-available
-#    - sites-enabled
-
 - name: (Debian/Ubuntu) Remove default nginx
   include_tasks: common/remove-default-site.yml
 
 - name: (Debian/Ubuntu) Apply NGINX Site template
   include_tasks: common/apply-site-template.yml
-
-
-#- name: Enable new site
-#  file:
-#    src: /etc/nginx/sites-available/default
-#    dest: /etc/nginx/sites-enabled/default
-#    state: link
-#  notify: (Handler) Start/reload NGINX
