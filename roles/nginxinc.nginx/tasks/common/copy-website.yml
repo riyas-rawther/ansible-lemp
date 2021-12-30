@@ -2,4 +2,4 @@
   copy:
     src: "{{ app_root }}"
     dest: "{{ document_root }}"
-    mode: preserve
+    mode: force
