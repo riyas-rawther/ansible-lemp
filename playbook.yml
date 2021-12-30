@@ -16,6 +16,7 @@
     document_root: /var/www
     app_root: html_demo_site-main
     nginx_path: /etc/nginx 
+    certbot-email: riyas@realtech.dev
 
 - name: Install PHP
   hosts: webserver
