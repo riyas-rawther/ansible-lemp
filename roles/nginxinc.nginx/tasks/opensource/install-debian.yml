@@ -31,11 +31,9 @@
   ignore_errors: "{{ ansible_check_mode }}"
   notify: (Handler) Run NGINX
 
-#- name: Copy website files to the server's document root
-#  copy:
-#    src: "{{ app_root }}"
-#    dest: "{{ document_root }}"
-#    mode: preserve
+- name: Copy Website
+  include_tasks: common/copy-website.yml
+
 
 #- name: Ensure site directories exist
 #  file:
