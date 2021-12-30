@@ -16,3 +16,9 @@
     document_root: /var/www
     app_root: html_demo_site-main
     nginx_path: /etc/nginx 
+
+- name: Install PHP
+  hosts: webserver
+  become: yes
+  roles:
+    - { role: geerlingguy.php }
