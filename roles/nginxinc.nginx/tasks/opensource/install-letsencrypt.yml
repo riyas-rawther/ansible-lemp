@@ -1,0 +1,28 @@
+---
+- name: Install  Certbot
+  apt: name=python3-certbot-nginx state=latest
+
+- name: install letsencrypt
+  apt: name=certbot state=latest
+
+- name: create letsencrypt directory
+  ansible.builtin.file:
+   path: /var/www/_letsencrypt
+   group: www-data
+   state: directory
+
+- name: Generate dhparams
+  shell: openssl dhparam -out /etc/nginx/dhparam.pem 2048
+  args:
+    creates: /etc/nginx/dhparam.pem
+
+- name: Obtain SSL certificates from Let's Encrypt using Certbot
+  shell: certbot certonly --webroot -d {{ server_name }} --email {{ certbot_email }} -w /var/www/_letsencrypt -n --agree-tos --force-renewal 
+
+- name: Uncomment SSL related directives in the configuration
+  shell: sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' /etc/nginx/sites-available/{{ server_name  }}.conf
+  notify: (Handler) Start/reload NGINX
+
+- name: Configure Certbot to reload NGINX when it successfully renews certificates
+  shell: echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh && sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh
+  notify: (Handler) Start/reload NGINX

@@ -31,7 +31,7 @@
   ignore_errors: "{{ ansible_check_mode }}"
   notify: (Handler) Run NGINX
 
-- name: Copy Website
+- name: Copy HTML Website
   include_tasks: common/copy-website.yml
 
 - name: (Debian/Ubuntu) Remove default nginx

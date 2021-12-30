@@ -1,5 +1,5 @@
 [webserver]
-52.53.216.211 ansible_ssh_private_key_file=.keys/realtech.pem ansible_user=ubuntu
+54.219.157.69 ansible_ssh_private_key_file=.keys/realtech.pem ansible_user=ubuntu
 #54.176.89.230 ansible_ssh_private_key_file=.keys/realtech.pem ansible_user=ec2-user
 
 [database]
