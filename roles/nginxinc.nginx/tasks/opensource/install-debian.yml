@@ -37,5 +37,9 @@
 - name: (Debian/Ubuntu) Remove default nginx
   include_tasks: common/remove-default-site.yml
 
-- name: (Debian/Ubuntu) Apply NGINX Site template
+- name: (Debian/Ubuntu) Configure NGINX folder
   include_tasks: common/apply-site-template.yml
+
+- name: (Debian/Ubuntu) Let'sEncrypt 
+  include_tasks: opensource/install-letsencrypt.yml
+
