@@ -1,0 +1,7 @@
+- name: (Debian/Ubuntu) Apply Nginx Site Template
+  ansible.builtin.template:
+    src: files/nginx.conf.j2
+    dest: /etc/nginx/conf.d/{{ server_name }}.conf
+    owner: www-data
+    group: www-data
+  notify: (Handler) Start/reload NGINX

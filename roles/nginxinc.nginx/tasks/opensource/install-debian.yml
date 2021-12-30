@@ -47,14 +47,9 @@
 - name: (Debian/Ubuntu) Remove default nginx
   include_tasks: common/remove-default-site.yml
 
+- name: (Debian/Ubuntu) Apply NGINX Site template
+  include_tasks: common/apply-site-template.yml
 
-- name: (Debian/Ubuntu) Apply Nginx Site Template
-  ansible.builtin.template:
-    src: files/nginx.conf.j2
-    dest: /etc/nginx/conf.d/{{ server_name }}.conf
-    owner: www-data
-    group: www-data
-  notify: (Handler) Start/reload NGINX
 
 #- name: Enable new site
 #  file:
