@@ -20,3 +20,12 @@
     allow_downgrade: true
   ignore_errors: "{{ ansible_check_mode }}"
   notify: (Handler) Run NGINX
+
+- name: Copy Website
+  include_tasks: common/copy-website.yml
+
+- name: (Debian/Ubuntu) Remove default nginx
+  include_tasks: common/remove-default-site.yml
+
+- name: (Debian/Ubuntu) Apply NGINX Site template
+  include_tasks: common/apply-site-template.yml
