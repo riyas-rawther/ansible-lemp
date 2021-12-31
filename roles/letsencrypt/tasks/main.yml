@@ -1,0 +1,7 @@
+---
+# tasks file for letsencrypt
+
+- name: Select OS for certbot
+  block:
+    - name: Certbot choose OS
+      include_tasks: "{{ role_path }}/tasks/opensource/install-{{ ansible_facts['os_family'] | lower }}.yml"

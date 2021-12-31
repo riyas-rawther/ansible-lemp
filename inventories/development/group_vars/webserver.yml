@@ -1,0 +1,8 @@
+nginx:
+  production:
+    site_hosts:
+      - server_name: "ansible.realtech.dev"
+      - document_root: /var/www
+      - app_root: html_demo_site-main
+      - nginx_path: /etc/nginx
+      - certbot_email: riyas@realtech.dev
