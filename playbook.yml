@@ -8,13 +8,19 @@
           "You must update Ansible to at least 2.12 to use this Ansible Roles."
 
 - name: Install nginx
-  hosts: prod-web
+  hosts: prod_web
   become: yes
   roles:
     - { role: nginxinc.nginx }
 
 - name: Install PHP
-  hosts: prod-web
+  hosts: prod_web
   become: yes
   roles:
     - { role: geerlingguy.php }
+
+- name: LetsEncrypt
+  hosts: prod_web
+  become: yes
+  roles:
+    - { role: letsencrypt }

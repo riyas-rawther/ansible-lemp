@@ -22,9 +22,9 @@ all:
       hosts:
         184.169.218.179:
         13.52.182.42:
-    prod-web:
+    prod_web:
       hosts:
         50.18.135.171:
-    prod-db:
+    prod_db:
       hosts:
         54.67.79.10:
