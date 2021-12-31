@@ -28,7 +28,9 @@
     src: "{{ nginx_path }}/sites-available/{{ server_name }}.conf"
     state: link
     force: yes
-  notify: (Handler) Start/reload NGINX
+  notify: 
+     - (Handler) Run NGINX
+     - (Handler) Start/reload NGINX
 
 
 
