@@ -1,4 +1,5 @@
-server_name: "ansible.realtech.dev"
+mysql_root_password: "{{ vault_db_password }}"
+server_name: "lemp.realtech.dev"
 document_root: /var/www
 app_root: html_demo_site-main
 nginx_path: /etc/nginx

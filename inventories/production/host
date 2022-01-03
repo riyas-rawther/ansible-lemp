@@ -4,8 +4,7 @@ all:
   children:
     webservers:
       hosts:
-        50.18.135.171:
-        13.52.182.42:
+        54.193.149.33:
     dbservers:
       hosts:
         184.169.218.179:
@@ -16,7 +15,7 @@ all:
         dbservers:
     prod:
       hosts:
-        54.67.79.10:
+        13.57.226.232:
         50.18.135.171:
     dev:
       hosts:
@@ -24,7 +23,7 @@ all:
         13.52.182.42:
     prod_web:
       hosts:
-        50.18.135.171:
+        54.193.149.33:
     prod_db:
       hosts:
         54.67.79.10:
