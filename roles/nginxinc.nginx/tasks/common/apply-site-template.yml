@@ -6,6 +6,7 @@
   with_items:
     - sites-available
     - sites-enabled
+    - global.d
 
 - name: (Common for all OS) copy nginx.conf file to /etc/nginx
   ansible.builtin.template:

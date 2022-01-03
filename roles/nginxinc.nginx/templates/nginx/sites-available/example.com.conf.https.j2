@@ -33,6 +33,11 @@ server {
         fastcgi_pass 127.0.0.1:9000;
         include      nginxconfig.io/php_fastcgi.conf;
     }
+
+    # handle phpmyadmin
+    location ~ \phpmyadmin$ {
+        include /etc/nginx/global.d/*.conf;
+    }
 }
 
 # subdomains redirect

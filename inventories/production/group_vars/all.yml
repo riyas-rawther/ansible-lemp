@@ -1,9 +1,9 @@
 #mysql_root_password: "{{ vault_db_password }}"
-install_nginx: false
-install_php: false
-install_le: false
+install_nginx: true
+install_php: true
+install_le: true
 install_mariadb: true
-
+install_phpmyadmin: true
 
 apt_cache_valid_time: 3600
 apt_package_state: present

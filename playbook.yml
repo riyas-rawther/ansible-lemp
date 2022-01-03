@@ -34,3 +34,10 @@
   roles:
     - role: mariadb
       when: install_mariadb | bool
+
+#- name: Install phpMyAdmin
+#  hosts: prod_web
+#  become: yes
+#  roles:
+#    - role: phpmyadmin
+#      when: install_phpmyadmin | bool
