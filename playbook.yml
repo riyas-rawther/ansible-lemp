@@ -11,16 +11,26 @@
   hosts: prod_web
   become: yes
   roles:
-    - { role: nginxinc.nginx }
+    - role: nginxinc.nginx
+      when: install_nginx | bool
 
 - name: Install PHP
   hosts: prod_web
   become: yes
   roles:
-    - { role: geerlingguy.php }
+    - role: geerlingguy.php
+      when: install_php | bool
 
 - name: LetsEncrypt
   hosts: prod_web
   become: yes
   roles:
-    - { role: letsencrypt }
+    - role: letsencrypt
+      when: install_le | bool
+
+- name: Mariadb
+  hosts: prod_web
+  become: yes
+  roles:
+    - role: mariadb
+      when: install_mariadb | bool
