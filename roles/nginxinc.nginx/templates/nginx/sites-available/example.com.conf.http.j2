@@ -1,5 +1,4 @@
 server {
-    ssl off;
     listen                  443; # ssl http2;
     listen                  [::]:443; # ssl http2;
     server_name             {{ server_name }};
@@ -34,11 +33,14 @@ server {
         fastcgi_pass 127.0.0.1:9000;
         include      nginxconfig.io/php_fastcgi.conf;
     }
+   
+    # handle phpMyAdmin
+    include snippets/phpmyadmin.conf;
+
 }
 
 # subdomains redirect
 server {
-    ssl off;
     listen                  443; # ssl http2;
     listen                  [::]:443; # ssl http2;
     server_name             *.{{ server_name }};
@@ -52,7 +54,6 @@ server {
 
 # HTTP redirect
 server {
-    ssl off;
     listen      80;
     listen      [::]:80;
     server_name .{{ server_name }};
